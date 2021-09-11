@@ -1,0 +1,37 @@
+--Recreating the IMDB top-rated TV SHows with one query
+--This formula provides a true 'Bayesian estimate', which takes into account the number of votes each title has received, minimum votes required to be on the list, and the mean vote for all titles
+--Formula used by IMDB to get weighted rank for the top 250 tv shows:
+	--weighted rank = (v/(v+m))*R + (m/(v+m))*C
+	--Where:
+		--R = average for the movie (mean)
+		--v = number of votes for the movie
+		--m = minimum votes required to be listed in the top 250 (currently 25000)
+		--C = the mean vote across the whole report (sub-query to calculate)
+
+SELECT 
+	primarytitle, 
+	startyear, 
+	avgrating,
+	numvotes,
+	ROUND((numvotes/(numvotes+25000))*avgrating 
+		  + (25000/(numvotes+25000))*
+		  	(	SELECT AVG(tr.avgrating)
+				FROM title_basics AS tb
+				JOIN title_ratings AS tr
+				ON tb.tconst = tr.tconst
+				WHERE tb.titletype IN ('tvSeries', 'tvMiniSeries')
+				), 1) 
+		  AS weighted_rank
+FROM 
+	title_basics AS tb
+JOIN 
+	title_ratings AS tr
+ON 
+	tb.tconst = tr.tconst
+WHERE 
+	tb.titletype IN ('tvSeries', 'tvMiniSeries')
+AND
+	tr.numvotes >= 25000
+ORDER BY 
+	weighted_rank DESC
+LIMIT 250
