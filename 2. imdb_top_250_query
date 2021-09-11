@@ -14,7 +14,7 @@ SELECT
 	numvotes,
 	ROUND((numvotes/(numvotes+25000))*avgrating 
 		  + (25000/(numvotes+25000))*
-		  	(	SELECT AVG(tr.avgrating)
+		  	(SELECT AVG(tr.avgrating)
 				FROM title_basics AS tb
 				JOIN title_ratings AS tr
 				ON tb.tconst = tr.tconst
