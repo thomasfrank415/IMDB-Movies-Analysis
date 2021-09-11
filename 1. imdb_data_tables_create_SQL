@@ -1,0 +1,202 @@
+-- Table: public.box_office
+
+-- DROP TABLE public.box_office;
+
+CREATE TABLE IF NOT EXISTS public.box_office
+(
+    id integer NOT NULL DEFAULT nextval('box_office_id_seq'::regclass),
+    rank integer,
+    year numeric,
+    tconst character varying COLLATE pg_catalog."default",
+    distributor character varying COLLATE pg_catalog."default",
+    domestic_box_office numeric,
+    international_box_office numeric,
+    worldwide_box_office numeric
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.box_office
+    OWNER to thomasfrank415;
+	
+-- Table: public.name_basics
+
+-- DROP TABLE public.name_basics;
+
+CREATE TABLE IF NOT EXISTS public.name_basics
+(
+    id integer NOT NULL DEFAULT nextval('name_basics_id_seq'::regclass),
+    idb integer,
+    nconst character varying COLLATE pg_catalog."default",
+    primaryname character varying COLLATE pg_catalog."default",
+    birthyear integer,
+    deathyear integer,
+    primaryprofession character varying COLLATE pg_catalog."default",
+    knownfortitles character varying COLLATE pg_catalog."default"
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.name_basics
+    OWNER to thomasfrank415;
+
+-- Table: public.title_akas
+
+-- DROP TABLE public.title_akas;
+
+CREATE TABLE IF NOT EXISTS public.title_akas
+(
+    id integer NOT NULL DEFAULT nextval('title_akas_id_seq'::regclass),
+    idb integer,
+    tconst character varying COLLATE pg_catalog."default",
+    ordering integer,
+    region character varying COLLATE pg_catalog."default",
+    language character varying COLLATE pg_catalog."default",
+    types character varying COLLATE pg_catalog."default",
+    attributes character varying COLLATE pg_catalog."default",
+    isoriginaltitle integer
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.title_akas
+    OWNER to thomasfrank415;
+
+-- Table: public.title_basics
+
+-- DROP TABLE public.title_basics;
+
+CREATE TABLE IF NOT EXISTS public.title_basics
+(
+    id integer NOT NULL DEFAULT nextval('title_basics_id_seq'::regclass),
+    blank integer,
+    tconst character varying COLLATE pg_catalog."default",
+    titletype character varying COLLATE pg_catalog."default",
+    primarytitle character varying COLLATE pg_catalog."default",
+    originaltitle character varying COLLATE pg_catalog."default",
+    isadult numeric,
+    startyear numeric,
+    endyear numeric,
+    runtimeminutes numeric,
+    genres character varying COLLATE pg_catalog."default"
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.title_basics
+    OWNER to thomasfrank415;
+
+-- Table: public.title_crew
+
+-- DROP TABLE public.title_crew;
+
+CREATE TABLE IF NOT EXISTS public.title_crew
+(
+    id integer NOT NULL DEFAULT nextval('title_crew_id_seq'::regclass),
+    idb integer,
+    tconst character varying COLLATE pg_catalog."default",
+    directors character varying COLLATE pg_catalog."default",
+    writers character varying COLLATE pg_catalog."default"
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.title_crew
+    OWNER to thomasfrank415;
+
+-- Table: public.title_episode
+
+-- DROP TABLE public.title_episode;
+
+CREATE TABLE IF NOT EXISTS public.title_episode
+(
+    id integer NOT NULL DEFAULT nextval('title_episode_id_seq'::regclass),
+    idb integer,
+    tconst character varying COLLATE pg_catalog."default",
+    parent_tconst character varying COLLATE pg_catalog."default",
+    season_number numeric,
+    episode_number numeric
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.title_episode
+    OWNER to thomasfrank415;
+
+-- Table: public.title_principals_a
+
+-- DROP TABLE public.title_principals_a;
+
+CREATE TABLE IF NOT EXISTS public.title_principals_a
+(
+    id integer NOT NULL DEFAULT nextval('title_principals_a_id_seq'::regclass),
+    idb integer,
+    tconst character varying COLLATE pg_catalog."default",
+    nconst character varying COLLATE pg_catalog."default",
+    category character varying COLLATE pg_catalog."default",
+    job character varying COLLATE pg_catalog."default",
+    characters character varying COLLATE pg_catalog."default"
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.title_principals_a
+    OWNER to thomasfrank415;
+
+-- Table: public.title_principals_b
+
+-- DROP TABLE public.title_principals_b;
+
+CREATE TABLE IF NOT EXISTS public.title_principals_b
+(
+    id integer NOT NULL DEFAULT nextval('title_principals_b_id_seq'::regclass),
+    idb integer,
+    tconst character varying COLLATE pg_catalog."default",
+    nconst character varying COLLATE pg_catalog."default",
+    category character varying COLLATE pg_catalog."default",
+    job character varying COLLATE pg_catalog."default",
+    characters character varying COLLATE pg_catalog."default"
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.title_principals_b
+    OWNER to thomasfrank415;
+
+-- Table: public.title_principals_c
+
+-- DROP TABLE public.title_principals_c;
+
+CREATE TABLE IF NOT EXISTS public.title_principals_c
+(
+    id integer NOT NULL DEFAULT nextval('title_principals_c_id_seq'::regclass),
+    idb integer,
+    tconst character varying COLLATE pg_catalog."default",
+    nconst character varying COLLATE pg_catalog."default",
+    category character varying COLLATE pg_catalog."default",
+    job character varying COLLATE pg_catalog."default",
+    characters character varying COLLATE pg_catalog."default"
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.title_principals_c
+    OWNER to thomasfrank415;
+
+-- Table: public.title_ratings
+
+-- DROP TABLE public.title_ratings;
+
+CREATE TABLE IF NOT EXISTS public.title_ratings
+(
+    id integer NOT NULL DEFAULT nextval('title_ratings_id_seq'::regclass),
+    idb integer,
+    tconst character varying COLLATE pg_catalog."default",
+    avgrating numeric,
+    numvotes numeric
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.title_ratings
+    OWNER to thomasfrank415;
