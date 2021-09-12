@@ -1,0 +1,32 @@
+SELECT *
+FROM
+	(SELECT primaryname, 
+	 		ROUND(AVG(avgrating), 1) AS average_film_rating, 
+	 		COUNT(*) AS number_films
+	FROM
+		(SELECT *
+		FROM
+			(SELECT * 
+			 	 FROM title_principals_a
+				UNION ALL
+				SELECT *
+			 	 FROM title_principals_b
+				UNION ALL
+				SELECT *
+			 	 FROM title_principals_c) AS tp
+		LEFT OUTER JOIN
+			title_basics AS tb
+			ON tp.tconst = tb.tconst
+		LEFT OUTER JOIN title_ratings AS tr
+			ON tp.tconst = tr.tconst
+		WHERE 
+		 category in ('director')
+		 AND titletype = 'movie'
+		 AND numvotes >= 25000) 
+		 	AS tp_mov
+	LEFT OUTER JOIN name_basics
+	ON tp_mov.nconst = name_basics.nconst
+GROUP BY primaryname
+ORDER BY AVG(avgrating) DESC) AS all_info_needed
+WHERE number_films >=5
+LIMIT 100
